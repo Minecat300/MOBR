@@ -1,4 +1,4 @@
-# For Open Computers
+-- For Open Computers
 
 local internet = require("internet")
 
