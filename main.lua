@@ -4,4 +4,6 @@ local internet = require("internet")
 
 local handle = internet.request("https://google.com")
 
-print(handle.readAll())
+for chunk in handle do
+    print(chunk)
+end
