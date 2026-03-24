@@ -4,19 +4,24 @@ local mobrUtils = require("mobrUtils")
 local handler = {}
 
 local function printHeaders(url)
-    internet.request(url, nil, function(_, response)
-        if response then
-            print("Status:", response.status)
+    local handle = internet.request(url)
 
-            if response.headers then
-                for k, v in pairs(response.headers) do
-                    print(k .. ":", v)
-                end
-            else
-                print("No headers received")
-            end
+    if not handle then
+        print("Request failed")
+        return
+    end
+
+    local headers = handle.response()
+
+    if headers then
+        print("Status:", headers.code)
+
+        for k, v in pairs(headers.headers or {}) do
+            print(k .. ":", v)
         end
-    end)
+    else
+        print("No headers received")
+    end
 end
 
 function handler.go(url)
