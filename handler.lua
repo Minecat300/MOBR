@@ -3,11 +3,11 @@ local mobrUtils = require("mobrUtils")
 
 local handler = {}
 
-function handler.go(url)
+local function fetchFromUrl(url)
     local fixedUrl = url
 
     if (not mobrUtils.startsWith(url, "http://") and not mobrUtils.startsWith(url, "https://")) then
-        fixedUrl = "http://" .. mobrUtils.stripProtocol(url)
+        fixedUrl = "https://" .. mobrUtils.stripProtocol(url)
     end
 
     local function fetch(u)
@@ -25,8 +25,8 @@ function handler.go(url)
     local result = fetch(fixedUrl)
 
     if not result then
-        local httpsUrl = "https://" .. mobrUtils.stripProtocol(url)
-        result = fetch(httpsUrl)
+        local httpUrl = "http://" .. mobrUtils.stripProtocol(url)
+        result = fetch(httpUrl)
     end
 
     if not result then
@@ -34,7 +34,11 @@ function handler.go(url)
         return
     end
 
-    print(result)
+    return result
+end
+
+function handler.go(url)
+    print(fetchFromUrl(url))
 end
 
 return handler
