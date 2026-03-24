@@ -11,7 +11,7 @@ local function printHeaders(url)
         return
     end
 
-    handle.read()
+    local chunk = handle.read()
     local headers = handle.response()
 
     if headers then
