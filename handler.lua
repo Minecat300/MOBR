@@ -3,40 +3,25 @@ local mobrUtils = require("mobrUtils")
 
 local handler = {}
 
-local function printHeaders(url)
-    local handle = internet.request(url)
-
-    if not handle then
-        print("Request failed")
-        return
-    end
-
-    local chunk = handle.read()
-    local headers = handle.response()
-
-    if headers then
-        print("Status:", headers.code)
-
-        for k, v in pairs(headers.headers or {}) do
-            print(k .. ":", v)
-        end
-    else
-        print("No headers received")
-    end
-end
-
 function handler.go(url)
+    local fixedUrl = url
     if (not mobrUtils.startsWith(url, "http://") and not mobrUtils.startsWith(url, "https://")) then
-        url = "http://" .. url
+        fixedUrl = "http://" .. mobrUtils.stripProtocol(url)
     end
 
-    return printHeaders(url)
+    local handle = internet.request(fixedUrl)
+    if not handle then
+        fixedUrl = "https://" .. mobrUtils.stripProtocol(url)
+        handle = internet.request(fixedUrl)
+        if not handle then
+            print("Can not connect to " .. url)
+            return
+        end
+    end
 
-    -- local handle = internet.request(url)
-
-    -- for chunk in handle do
-    --     print(chunk)
-    -- end
+    for chunk in handle do
+        print(chunk)
+    end
 
 end
 
