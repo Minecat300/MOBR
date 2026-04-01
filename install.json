@@ -2,7 +2,7 @@
     "packageName": "mobr",
     "description": "simple web browser",
     "autoUpdate": true,
-    "version": "1.0.16",
+    "version": "1.0.17",
     "programPath": "/bin/mobr.lua",
     "installPath": "/",
     "fileInstalls": [
