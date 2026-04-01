@@ -77,9 +77,12 @@ end
 
 function mobrUtils.urlConcat(...)
     local parts = {...}
+    print(parts)
     local result = ""
 
     for i, part in ipairs(parts) do
+        part = tostring(part)
+
         if i == 1 then
             result = part
         else
