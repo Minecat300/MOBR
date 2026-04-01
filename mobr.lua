@@ -17,7 +17,7 @@ if command == "go" then
         return
     end
 
-    print(mobrCacher.cacheUrl(cachePath, url))
+    print(mobrCacher.cacheUrl(url, cachePath))
 end
 
 if command == "help" or command == "h" or command == "?" or not command then
