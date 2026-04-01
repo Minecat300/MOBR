@@ -1,9 +1,9 @@
 local internet = require("internet")
 local mobrUtils = require("mobrUtils")
 
-local handler = {}
+local mobrFetcher = {}
 
-local function fetchFromUrl(url)
+function mobrFetcher.fetchFromUrl(url)
     local fixedUrl = url
 
     if (not mobrUtils.startsWith(url, "http://") and not mobrUtils.startsWith(url, "https://")) then
@@ -37,8 +37,4 @@ local function fetchFromUrl(url)
     return result
 end
 
-function handler.go(url)
-    print(fetchFromUrl(url))
-end
-
-return handler
+return mobrFetcher
