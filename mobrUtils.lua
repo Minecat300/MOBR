@@ -9,7 +9,7 @@ function mobrUtils.startsWith(str, start)
 end
 
 function mobrUtils.stripProtocol(url)
-    return url:gsub("^https?://", "")
+    return (url:gsub("^https?://", ""))
 end
 
 function mobrUtils.readObjectFile(filePath)
@@ -115,6 +115,16 @@ function mobrUtils.ensureDirs(path)
             fs.makeDirectory(current)
         end
     end
+end
+
+function mobrUtils.splitBySpace(str)
+    local result = {}
+
+    for word in str:gmatch("%S+") do
+        table.insert(result, word)
+    end
+
+    return result
 end
 
 return mobrUtils

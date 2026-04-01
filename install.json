@@ -2,12 +2,13 @@
     "packageName": "mobr",
     "description": "simple web browser",
     "autoUpdate": true,
-    "version": "1.0.17",
+    "version": "1.0.18",
     "programPath": "/bin/mobr.lua",
     "installPath": "/",
     "fileInstalls": [
         {"subPath": "mobr/", "name": "mobrFetcher.lua", "type": "file"},
         {"subPath": "mobr/", "name": "mobrCacher.lua", "type": "file"},
+        {"subPath": "mobr/", "name": "mobrParser.lua", "type": "file"},
         {"subPath": "mobr/", "name": "dkjson.lua", "type": "file"},
         {"subPath": "mobr/", "name": "mobrUtils.lua", "type": "file"},
         {"subPath": "bin/", "name": "mobr.lua", "type": "file"}

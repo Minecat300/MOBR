@@ -1,8 +1,11 @@
 package.path = "/mobr/?.lua;" .. package.path
 
+local seri = require("serialization")
+
 local mobrFetcher = require("mobrFetcher")
 local mobrUtils = require("mobrUtils")
 local mobrCacher = require("mobrCacher")
+local mobrParser = require("mobrParser")
 
 local cachePath = "/mobr/cache/"
 mobrUtils.ensureDirs(cachePath)
@@ -17,7 +20,16 @@ if command == "go" then
         return
     end
 
-    print(mobrCacher.cacheUrl(url, cachePath))
+    local html = mobrCacher.cacheUrl(url, cachePath)
+    if not html then
+        print("Error: failed to cache url")
+        return
+    end
+
+    local head, body = mobrParser.splitHtml(html)
+
+    local segmentedBody = mobrParser.segmentHtml(body)
+    print(seri.serialize(segmentedBody))
 end
 
 if command == "help" or command == "h" or command == "?" or not command then
