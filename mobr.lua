@@ -29,7 +29,7 @@ if command == "go" then
     local head, body = mobrParser.splitHtml(html)
 
     local segmentedBody = mobrParser.segmentHtml(body)
-    print(seri.serialize(segmentedBody))
+    print(seri.serialize(segmentedBody, 1000))
 end
 
 if command == "help" or command == "h" or command == "?" or not command then

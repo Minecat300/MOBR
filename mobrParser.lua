@@ -57,13 +57,21 @@ function mobrParser.segmentHtml(html)
 end
 
 function mobrParser.splitHtml(html)
-    local headStart = string.find(html, "<head>")
-    local headEnd = string.find(html, "</head>")
-    local head = string.sub(html, headStart + 1, headEnd - 1)
+    local headStart, headEnd = string.find(html:lower(), "<head>")
+    local headCloseStart, headCloseEnd = string.find(html:lower(), "</head>")
 
-    local bodyStart = string.find(html, "<body>")
-    local bodyEnd = string.find(html, "</body>")
-    local body = string.sub(html, bodyStart + 1, bodyEnd - 1)
+    local head = ""
+    if headStart and headCloseStart then
+        head = string.sub(html, headEnd + 1, headCloseStart - 1)
+    end
+
+    local bodyStart, bodyEnd = string.find(html:lower(), "<body>")
+    local bodyCloseStart, bodyCloseEnd = string.find(html:lower(), "</body>")
+
+    local body = ""
+    if bodyStart and bodyCloseStart then
+        body = string.sub(html, bodyEnd + 1, bodyCloseStart - 1)
+    end
 
     return head, body
 end
